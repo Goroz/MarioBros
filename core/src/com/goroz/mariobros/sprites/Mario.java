@@ -15,7 +15,7 @@ import com.goroz.mariobros.MarioBros;
 import com.goroz.mariobros.screen.PlayScreen;
 
 /**
- * Created by HC Lim on 8/5/2016.
+ * Class about Mario
  */
 public class Mario extends Sprite {
     public World world;
@@ -93,6 +93,7 @@ public class Mario extends Sprite {
         fdef.shape = head;
         fdef.isSensor = true;
         b2body.createFixture(fdef).setUserData("head");
+        System.out.println(b2body.getPosition().x + ", " + b2body.getPosition().y);
     }
 
     public void jump() {
@@ -141,11 +142,10 @@ public class Mario extends Sprite {
     }
 
     public void update(float delta) {
-        float y = b2body.getLinearVelocity().y;
         checkCanMove();
-        setPosition(b2body.getPosition().x - getWidth() / 2, (y - getHeight())/2 );
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight()/2 );
         setRegion(getFrame(delta));
-        if (y == 0) {
+        if (b2body.getLinearVelocity().y == 0) {
             jumpCount = 0;
         }
     }
