@@ -55,20 +55,20 @@ public class Mario extends Sprite {
 
         defineMario(world);
         marioStand = new TextureRegion(getTexture(), 0, 0, 16, 16);
-        setBounds(0, 0, 16 / MarioBros.PPM, 16 / MarioBros.PPM);
+        setBounds(0, 0, MarioBros.TILE_SIZE / MarioBros.PPM, MarioBros.TILE_SIZE / MarioBros.PPM);
         setRegion(marioStand);
     }
 
     public void addAnimation() {
         Array<TextureRegion> frames = new Array<TextureRegion>();
         for (int i = 1; i < 4; i++) {
-            frames.add(new TextureRegion(getTexture(), i * 16, 0, 16, 16));
+            frames.add(new TextureRegion(getTexture(), i * MarioBros.TILE_SIZE, 0, MarioBros.TILE_SIZE, MarioBros.TILE_SIZE));
         }
         marioRun = new Animation(POINT_1, frames);
         frames.clear();
 
         for (int i = 4; i < 6; i++) {
-            frames.add(new TextureRegion(getTexture(), i * 16, 0,16, 16));
+            frames.add(new TextureRegion(getTexture(), i * MarioBros.TILE_SIZE, 0, MarioBros.TILE_SIZE, MarioBros.TILE_SIZE));
         }
         marioJump = new Animation(POINT_1, frames);
     }
@@ -93,12 +93,13 @@ public class Mario extends Sprite {
         fdef.shape = head;
         fdef.isSensor = true;
         b2body.createFixture(fdef).setUserData("head");
-        System.out.println(b2body.getPosition().x + ", " + b2body.getPosition().y);
     }
 
     public void jump() {
+        //can only jump 2 times consecutively
         final int MAX_JUMP_COUNT = 2;
         if (jumpCount < MAX_JUMP_COUNT) {
+            // second jump is lower than first jump
             MOVE_VECTOR.set(0, 3.5f - jumpCount);
             b2body.applyLinearImpulse(MOVE_VECTOR, b2body.getWorldCenter(), true);
             jumpCount++;
@@ -128,6 +129,7 @@ public class Mario extends Sprite {
         }
     }
 
+    // Prevent mario move outside the map bound horizontally
     public void checkCanMove() {
         final float MAP_BOUND_OFFSET = 0.3f;
         float x = b2body.getPosition().x;
@@ -145,6 +147,7 @@ public class Mario extends Sprite {
         checkCanMove();
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight()/2 );
         setRegion(getFrame(delta));
+        // if player foot touch ground/bricks/coins velocity y = 0, reset jumpcount
         if (b2body.getLinearVelocity().y == 0) {
             jumpCount = 0;
         }
