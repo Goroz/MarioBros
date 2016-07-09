@@ -154,6 +154,11 @@ public class Mario extends Sprite {
         checkCanMove();
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight()/2 );
         setRegion(getFrame(delta));
+        // if player foot.position.y is static, velocity y = 0, reset jumpcount
+        if (b2body.getLinearVelocity().y == 0) {
+            jumpCount = 0;
+        }
+
     }
 
     public State getState() {
