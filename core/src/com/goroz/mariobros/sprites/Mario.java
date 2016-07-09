@@ -27,12 +27,13 @@ public class Mario extends Sprite {
         FALLING, JUMPING, STANDING, RUNNING
     }
 
-    public State currentState, previousState;
+    private State currentState, previousState;
     private Animation marioRun, marioJump;
     private Boolean runningRight;
     private float stateTimer;
+
     // movement
-    private int jumpCount = 0;
+    public static int jumpCount = 0;
     private final Vector2 MOVE_VECTOR = new Vector2(0, 0);
     private Boolean canGoRight;
     private Boolean canGoLeft;
@@ -93,6 +94,12 @@ public class Mario extends Sprite {
         fdef.shape = head;
         fdef.isSensor = true;
         b2body.createFixture(fdef).setUserData("head");
+
+        EdgeShape foot = new EdgeShape();
+        foot.set(new Vector2(-2 / MarioBros.PPM, -6 / MarioBros.PPM), new Vector2(2 / MarioBros.PPM, -6 / MarioBros.PPM));
+        fdef.shape = foot;
+        fdef.isSensor = true;
+        b2body.createFixture(fdef).setUserData("foot");
     }
 
     public void jump() {
@@ -147,10 +154,6 @@ public class Mario extends Sprite {
         checkCanMove();
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight()/2 );
         setRegion(getFrame(delta));
-        // if player foot touch ground/bricks/coins velocity y = 0, reset jumpcount
-        if (b2body.getLinearVelocity().y == 0) {
-            jumpCount = 0;
-        }
     }
 
     public State getState() {
@@ -194,5 +197,6 @@ public class Mario extends Sprite {
 
         return region;
     }
+
 
 }

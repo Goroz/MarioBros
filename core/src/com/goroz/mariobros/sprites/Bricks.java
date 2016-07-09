@@ -30,4 +30,9 @@ public class Bricks extends InteractiveTileObject{
         game.manager.get("audio/sounds/breakblock.wav", Sound.class).play();
 
     }
+
+    @Override
+    public void onFootHit() {
+        Mario.jumpCount = 0;
+    }
 }

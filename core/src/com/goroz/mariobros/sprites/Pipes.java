@@ -18,6 +18,11 @@ public class Pipes extends InteractiveTileObject {
 
     @Override
     public void onHeadHit() {
-        Gdx.app.log("pipes","collision");
+        Gdx.app.log("pipes","hcollision");
+    }
+
+    @Override
+    public void onFootHit() {
+       Mario.jumpCount = 0;
     }
 }

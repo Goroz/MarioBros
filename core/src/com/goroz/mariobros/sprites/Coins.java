@@ -40,4 +40,9 @@ public class Coins extends InteractiveTileObject {
         Hud.addScore(100);
 
     }
+
+    @Override
+    public void onFootHit() {
+        Mario.jumpCount = 0;
+    }
 }
