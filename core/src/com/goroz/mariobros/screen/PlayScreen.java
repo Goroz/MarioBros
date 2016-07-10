@@ -17,9 +17,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.goroz.mariobros.MarioBros;
-
 import com.goroz.mariobros.scenes.Hud;
-import com.goroz.mariobros.sprites.Goomba;
+import com.goroz.mariobros.sprites.Enemies.Enemy;
 import com.goroz.mariobros.sprites.Mario;
 import com.goroz.mariobros.tools.B2WorldCreator;
 import com.goroz.mariobros.tools.WorldContactListener;
@@ -47,9 +46,9 @@ public class PlayScreen implements Screen {
     //Box2d variables
     private World world;
     private Box2DDebugRenderer b2dr;
+    private B2WorldCreator creator;
 
     private Mario player;
-    private Goomba goomba;
     private Music music;
 
     public PlayScreen(MarioBros game) {
@@ -79,7 +78,7 @@ public class PlayScreen implements Screen {
         world.setContactListener(new WorldContactListener());
 
         //create environment and player
-        new B2WorldCreator(this, game);
+        creator = new B2WorldCreator(this, game);
         player = new Mario(this, mapWidth);
 
 
@@ -87,7 +86,7 @@ public class PlayScreen implements Screen {
         music.setLooping(true);
         music.play();
 
-        //goomba = new Goomba(this, .32f, .32f);
+
     }
 
     public TextureAtlas getAtlas(){
@@ -99,7 +98,7 @@ public class PlayScreen implements Screen {
 
     }
 
-    public void handleInput(float dt) {
+    private void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             player.jump();
         }
@@ -111,17 +110,22 @@ public class PlayScreen implements Screen {
         }
     }
 
-    public void update(float delta) {
-        handleInput(delta);
+    private void update(float delta) {
+        handleInput();
         world.step(1 / 60f, 6, 2);
         player.update(delta);
-//        goomba.update(delta);
+        for (Enemy enemy : creator.getGoombas()) {
+            enemy.update(delta, this);
+            // 12 tiles * 16 pixel / scale
+            if (enemy.getX() < player.getX() + 224 / MarioBros.PPM) {
+                enemy.b2Body.setActive(true);
+            }
+        }
         hud.update(delta);
         if(player.b2body.getPosition().x > gamePort.getWorldWidth()/2 && (player.b2body.getPosition().x + gamePort.getWorldWidth()/2) < mapWidth * 16 / MarioBros.PPM ) {
             gameCam.position.x = player.b2body.getPosition().x;
 
         }
-
         gameCam.update();
         renderer.setView(gameCam);
     }
@@ -132,7 +136,6 @@ public class PlayScreen implements Screen {
     public void render(float delta) {
         //separate update logic from render
         update(delta);
-
 
         //clear game screen with black
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -147,7 +150,9 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
         player.draw(game.batch);
-        //goomba.draw(game.batch);
+        for (Enemy enemy : creator.getGoombas()) {
+            enemy.draw(game.batch);
+        }
         game.batch.end();
 
         // Set batch to now draw what the HUD camera sees
