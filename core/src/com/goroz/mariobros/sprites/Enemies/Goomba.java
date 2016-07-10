@@ -1,5 +1,6 @@
 package com.goroz.mariobros.sprites.Enemies;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -22,9 +23,11 @@ public class Goomba extends Enemy {
     private Array<TextureRegion> frames;
     private boolean setToDestroyed;
     private boolean destroyed;
+    private MarioBros game;
 
-    public Goomba(PlayScreen screen, float x, float y) {
+    public Goomba(PlayScreen screen, float x, float y, MarioBros game) {
         super(screen, x, y);
+        this.game = game;
         frames = new Array<TextureRegion>();
         for (int i = 0; i < 2; i++) {
             frames.add(new TextureRegion(screen.getAtlas().findRegion("goomba"), i * 16, 0, 16, 16));
@@ -91,6 +94,7 @@ public class Goomba extends Enemy {
     @Override
     public void hitOnHead() {
         setToDestroyed = true;
+        game.manager.get("audio/sounds/stomp.wav", Sound.class).play();
         Hud.addScore(100);
     }
 }
