@@ -9,7 +9,7 @@ import com.goroz.mariobros.sprites.*;
 /**
  * Created by HC Lim on 8/5/2016.
  */
-public class Pipes extends com.goroz.mariobros.sprites.InteractiveTileObject {
+public class Pipes extends InteractiveTileObject {
     public Pipes(PlayScreen screen, Rectangle bounds) {
         super(screen, bounds);
         fixture.setUserData(this);
