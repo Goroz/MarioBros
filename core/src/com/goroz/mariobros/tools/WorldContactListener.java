@@ -9,7 +9,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.goroz.mariobros.MarioBros;
 import com.goroz.mariobros.sprites.Enemies.Enemy;
 import com.goroz.mariobros.sprites.Enemies.Goomba;
-import com.goroz.mariobros.sprites.InteractiveTileObject;
+import com.goroz.mariobros.sprites.TileObjects.InteractiveTileObject;
 import com.goroz.mariobros.sprites.Mario;
 
 

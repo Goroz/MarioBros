@@ -8,11 +8,11 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.goroz.mariobros.MarioBros;
 import com.goroz.mariobros.screen.PlayScreen;
-import com.goroz.mariobros.sprites.Bricks;
-import com.goroz.mariobros.sprites.Coins;
+import com.goroz.mariobros.sprites.TileObjects.Bricks;
+import com.goroz.mariobros.sprites.TileObjects.Coins;
 import com.goroz.mariobros.sprites.Enemies.Goomba;
-import com.goroz.mariobros.sprites.Grounds;
-import com.goroz.mariobros.sprites.Pipes;
+import com.goroz.mariobros.sprites.TileObjects.Grounds;
+import com.goroz.mariobros.sprites.TileObjects.Pipes;
 
 /**
  * Created by HC Lim on 8/5/2016.

@@ -1,13 +1,12 @@
-package com.goroz.mariobros.sprites;
+package com.goroz.mariobros.sprites.TileObjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.World;
 import com.goroz.mariobros.MarioBros;
 import com.goroz.mariobros.scenes.Hud;
 import com.goroz.mariobros.screen.PlayScreen;
+import com.goroz.mariobros.sprites.Mario;
 
 /**
  * Created by HC Lim on 8/5/2016.

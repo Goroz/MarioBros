@@ -1,14 +1,15 @@
-package com.goroz.mariobros.sprites;
+package com.goroz.mariobros.sprites.TileObjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.goroz.mariobros.MarioBros;
 import com.goroz.mariobros.screen.PlayScreen;
+import com.goroz.mariobros.sprites.*;
 
 /**
  * Created by HC Lim on 8/5/2016.
  */
-public class Pipes extends InteractiveTileObject {
+public class Pipes extends com.goroz.mariobros.sprites.InteractiveTileObject {
     public Pipes(PlayScreen screen, Rectangle bounds) {
         super(screen, bounds);
         fixture.setUserData(this);
