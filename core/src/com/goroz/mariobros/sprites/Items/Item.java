@@ -12,16 +12,16 @@ import com.goroz.mariobros.screen.PlayScreen;
  * Created by HC Lim on 10/7/2016.
  */
 
-public abstract class Items extends Sprite {
+public abstract class Item extends Sprite {
 
     protected PlayScreen screen;
     protected World world;
     protected Vector2 velocity;
     private boolean setToDestroyed;
     private boolean destroyed;
-    private Body body;
+    protected Body body;
 
-    public Items(PlayScreen screen, float x, float y) {
+    public Item(PlayScreen screen, float x, float y) {
         this.screen = screen;
         this.world = screen.getWorld();
         setPosition(x, y);
