@@ -43,7 +43,7 @@ public class WorldContactListener implements ContactListener {
                 ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
                 ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 break;
-            case (MarioBros.MARIO_HEAD_BIT | MarioBros.COIN_BIT | MarioBros.BRICK_BIT):
+            case (MarioBros.MARIO_HEAD_BIT | MarioBros.COIN_BIT):
 
                 if (fixA.getFilterData().categoryBits == MarioBros.COIN_BIT) {
                     ((Coins) fixA.getUserData()).onHeadHit();
