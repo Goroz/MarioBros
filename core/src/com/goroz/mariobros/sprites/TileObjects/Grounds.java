@@ -20,9 +20,4 @@ public class Grounds extends InteractiveTileObject {
     public void onHeadHit() {
 
     }
-
-    @Override
-    public void onFootHit() {
-        Mario.jumpCount = 0;
-    }
 }

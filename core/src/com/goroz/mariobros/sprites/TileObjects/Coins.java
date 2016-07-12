@@ -40,8 +40,4 @@ public class Coins extends InteractiveTileObject {
 
     }
 
-    @Override
-    public void onFootHit() {
-        Mario.jumpCount = 0;
-    }
 }

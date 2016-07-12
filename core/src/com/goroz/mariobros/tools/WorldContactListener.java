@@ -8,10 +8,8 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.goroz.mariobros.MarioBros;
 import com.goroz.mariobros.sprites.Enemies.Enemy;
-import com.goroz.mariobros.sprites.Enemies.Goomba;
-import com.goroz.mariobros.sprites.TileObjects.InteractiveTileObject;
-import com.goroz.mariobros.sprites.Mario;
-
+import com.goroz.mariobros.sprites.TileObjects.Bricks;
+import com.goroz.mariobros.sprites.TileObjects.Coins;
 
 /**
  * Created by HC Lim on 8/5/2016.
@@ -22,27 +20,7 @@ public class WorldContactListener implements ContactListener {
 
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
-        Object aUserData = fixA.getUserData();
-        Object bUserData = fixA.getUserData();
-
-        if(aUserData == "head" || bUserData == "head" ){
-            Fixture head = aUserData == "head " ? fixA : fixB;
-            Fixture object = head == fixB ? fixB : fixA;
-            if(object.getUserData() instanceof InteractiveTileObject) {
-                ((InteractiveTileObject) object.getUserData()).onHeadHit();
-            }
-        }else if(aUserData == "foot" || bUserData == "foot" ){
-            Fixture foot = aUserData == "foot" ? fixA : fixB;
-            Fixture object = foot == fixB ? fixB : fixA;
-            if(object.getUserData() instanceof InteractiveTileObject) {
-                ((InteractiveTileObject) object.getUserData()).onFootHit();
-            }else if (object.getUserData() instanceof Goomba){
-                Mario.jumpCount = 0;
-            }
-        }
-
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
-
         switch (cDef) {
             case (MarioBros.ENEMY_HEAD_BIT | MarioBros.MARIO_BIT):
                 if (fixA.getFilterData().categoryBits == MarioBros.ENEMY_HEAD_BIT) {
@@ -61,9 +39,24 @@ public class WorldContactListener implements ContactListener {
             case (MarioBros.ENEMY_BIT | MarioBros.MARIO_BIT):
                 Gdx.app.log("Mario", "DIED");
                 break;
-            case (MarioBros.ENEMY_BIT | MarioBros.ENEMY_BIT):
+            case (MarioBros.ENEMY_BIT):
                 ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
                 ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
+                break;
+            case (MarioBros.MARIO_HEAD_BIT | MarioBros.COIN_BIT | MarioBros.BRICK_BIT):
+
+                if (fixA.getFilterData().categoryBits == MarioBros.COIN_BIT) {
+                    ((Coins) fixA.getUserData()).onHeadHit();
+                } else {
+                    ((Coins) fixB.getUserData()).onHeadHit();
+                }
+                break;
+            case (MarioBros.MARIO_HEAD_BIT | MarioBros.BRICK_BIT):
+                if (fixA.getFilterData().categoryBits == MarioBros.BRICK_BIT) {
+                    ((Bricks) fixA.getUserData()).onHeadHit();
+                } else {
+                    ((Bricks) fixB.getUserData()).onHeadHit();
+                }
                 break;
         }
     }

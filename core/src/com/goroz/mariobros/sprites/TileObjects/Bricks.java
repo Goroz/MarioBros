@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.goroz.mariobros.MarioBros;
 import com.goroz.mariobros.scenes.Hud;
 import com.goroz.mariobros.screen.PlayScreen;
-import com.goroz.mariobros.sprites.Mario;
 
 /**
  * Created by HC Lim on 8/5/2016.
@@ -30,8 +29,4 @@ public class Bricks extends InteractiveTileObject{
 
     }
 
-    @Override
-    public void onFootHit() {
-        Mario.jumpCount = 0;
-    }
 }

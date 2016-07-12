@@ -33,7 +33,7 @@ public class Mario extends Sprite {
     private float stateTimer;
 
     // movement
-    public static int jumpCount = 0;
+    private int jumpCount = 0;
     private final Vector2 MOVE_VECTOR = new Vector2(0, 0);
     private Boolean canGoRight;
     private Boolean canGoLeft;
@@ -93,13 +93,9 @@ public class Mario extends Sprite {
         head.set(new Vector2(-2 / MarioBros.PPM, 6 / MarioBros.PPM), new Vector2(2 / MarioBros.PPM, 6 / MarioBros.PPM));
         fdef.shape = head;
         fdef.isSensor = true;
+        fdef.filter.categoryBits = MarioBros.MARIO_HEAD_BIT;
         b2body.createFixture(fdef).setUserData("head");
 
-        EdgeShape foot = new EdgeShape();
-        foot.set(new Vector2(-2 / MarioBros.PPM, -6 / MarioBros.PPM), new Vector2(2 / MarioBros.PPM, -6 / MarioBros.PPM));
-        fdef.shape = foot;
-        fdef.isSensor = true;
-        b2body.createFixture(fdef).setUserData("foot");
     }
 
     public void jump() {
