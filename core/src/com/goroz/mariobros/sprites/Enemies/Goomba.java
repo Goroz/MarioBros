@@ -1,5 +1,6 @@
 package com.goroz.mariobros.sprites.Enemies;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -42,6 +43,10 @@ public class Goomba extends Enemy {
     @Override
     public void update(float dt, PlayScreen screen) {
         stateTime += dt;
+        //destroyed if Goomba fall into hole
+        if (b2Body.getPosition().y < 0) {
+            setToDestroyed = true;
+        }
         if (setToDestroyed && !destroyed) {
             world.destroyBody(b2Body);
             destroyed = true;

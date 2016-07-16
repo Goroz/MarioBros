@@ -12,6 +12,8 @@ import com.goroz.mariobros.sprites.Items.Item;
 import com.goroz.mariobros.sprites.Mario;
 import com.goroz.mariobros.sprites.TileObjects.Bricks;
 import com.goroz.mariobros.sprites.TileObjects.Coins;
+import com.goroz.mariobros.sprites.TileObjects.Grounds;
+import com.goroz.mariobros.sprites.TileObjects.Pipes;
 
 /**
  * Created by HC Lim on 8/5/2016.
@@ -72,6 +74,38 @@ public class WorldContactListener implements ContactListener {
                     ((Item) fixA.getUserData()).use((Mario) fixB.getUserData());
                 } else {
                     ((Item) fixB.getUserData()).use((Mario) fixA.getUserData());
+                }
+                break;
+            case (MarioBros.MARIO_FOOT_BIT | MarioBros.COIN_BIT):
+
+                if (fixA.getFilterData().categoryBits == MarioBros.COIN_BIT) {
+                    ((Coins) fixA.getUserData()).onFootHit();
+                } else {
+                    ((Coins) fixB.getUserData()).onFootHit();
+                }
+                break;
+            case (MarioBros.MARIO_FOOT_BIT | MarioBros.BRICK_BIT):
+
+                if (fixA.getFilterData().categoryBits == MarioBros.BRICK_BIT) {
+                    ((Bricks) fixA.getUserData()).onFootHit();
+                } else {
+                    ((Bricks) fixB.getUserData()).onFootHit();
+                }
+                break;
+            case (MarioBros.MARIO_FOOT_BIT | MarioBros.OBJECT_BIT):
+
+                if (fixA.getFilterData().categoryBits == MarioBros.OBJECT_BIT) {
+                    ((Pipes) fixA.getUserData()).onFootHit();
+                } else {
+                    ((Pipes) fixB.getUserData()).onFootHit();
+                }
+                break;
+            case (MarioBros.MARIO_FOOT_BIT | MarioBros.GROUND_BIT):
+
+                if (fixA.getFilterData().categoryBits == MarioBros.GROUND_BIT) {
+                    ((Grounds) fixA.getUserData()).onFootHit();
+                } else {
+                    ((Grounds) fixB.getUserData()).onFootHit();
                 }
                 break;
         }

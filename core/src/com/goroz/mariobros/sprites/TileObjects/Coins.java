@@ -10,6 +10,7 @@ import com.goroz.mariobros.scenes.Hud;
 import com.goroz.mariobros.screen.PlayScreen;
 import com.goroz.mariobros.sprites.Items.ItemDef;
 import com.goroz.mariobros.sprites.Items.Mushroom;
+import com.goroz.mariobros.sprites.Mario;
 
 /**
  * Created by HC Lim on 8/5/2016.
@@ -45,8 +46,10 @@ public class Coins extends InteractiveTileObject {
             }
         }
         getCell().setTile(tileSet.getTile(BLANK_COIN));
+    }
 
-
+    public void onFootHit() {
+        Mario.jumpCount = 0;
     }
 
 }

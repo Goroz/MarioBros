@@ -1,5 +1,6 @@
 package com.goroz.mariobros.sprites;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -33,7 +34,7 @@ public class Mario extends Sprite {
     private float stateTimer;
 
     // movement
-    private int jumpCount = 0;
+    public static int jumpCount = 0;
     private final Vector2 MOVE_VECTOR = new Vector2(0, 0);
     private Boolean canGoRight;
     private Boolean canGoLeft;
@@ -96,6 +97,13 @@ public class Mario extends Sprite {
         fdef.filter.categoryBits = MarioBros.MARIO_HEAD_BIT;
         b2body.createFixture(fdef).setUserData("head");
 
+        EdgeShape foot = new EdgeShape();
+        foot.set(new Vector2(-2 / MarioBros.PPM, -6 / MarioBros.PPM), new Vector2(2 / MarioBros.PPM, -6 / MarioBros.PPM));
+        fdef.shape = foot;
+        fdef.isSensor = true;
+        fdef.filter.categoryBits = MarioBros.MARIO_FOOT_BIT;
+        b2body.createFixture(fdef).setUserData("foot");
+
     }
 
     public void jump() {
@@ -150,10 +158,6 @@ public class Mario extends Sprite {
         checkCanMove();
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion(getFrame(delta));
-        // if player foot.position.y is static, velocity y = 0, reset jumpcount
-        if (b2body.getLinearVelocity().y == 0) {
-            jumpCount = 0;
-        }
 
     }
 
