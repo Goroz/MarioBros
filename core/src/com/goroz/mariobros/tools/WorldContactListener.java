@@ -8,6 +8,8 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.goroz.mariobros.MarioBros;
 import com.goroz.mariobros.sprites.Enemies.Enemy;
+import com.goroz.mariobros.sprites.Items.Item;
+import com.goroz.mariobros.sprites.Mario;
 import com.goroz.mariobros.sprites.TileObjects.Bricks;
 import com.goroz.mariobros.sprites.TileObjects.Coins;
 
@@ -56,6 +58,20 @@ public class WorldContactListener implements ContactListener {
                     ((Bricks) fixA.getUserData()).onHeadHit();
                 } else {
                     ((Bricks) fixB.getUserData()).onHeadHit();
+                }
+                break;
+            case (MarioBros.ITEM_BIT | MarioBros.OBJECT_BIT):
+                if (fixA.getFilterData().categoryBits == MarioBros.ITEM_BIT) {
+                    ((Item) fixA.getUserData()).reverseVelocity(true, false);
+                } else {
+                    ((Item) fixB.getUserData()).reverseVelocity(true, false);
+                }
+                break;
+            case (MarioBros.ITEM_BIT | MarioBros.MARIO_BIT):
+                if (fixA.getFilterData().categoryBits == MarioBros.ITEM_BIT) {
+                    ((Item) fixA.getUserData()).use((Mario) fixB.getUserData());
+                } else {
+                    ((Item) fixB.getUserData()).use((Mario) fixA.getUserData());
                 }
                 break;
         }

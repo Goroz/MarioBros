@@ -2,6 +2,7 @@ package com.goroz.mariobros.sprites.TileObjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.goroz.mariobros.MarioBros;
 import com.goroz.mariobros.scenes.Hud;
@@ -12,8 +13,9 @@ import com.goroz.mariobros.screen.PlayScreen;
  */
 public class Bricks extends InteractiveTileObject{
     private MarioBros game;
-    public Bricks(PlayScreen screen, Rectangle bounds, MarioBros game) {
-        super(screen, bounds);
+
+    public Bricks(PlayScreen screen, MapObject object, MarioBros game) {
+        super(screen, object);
         this.game = game;
         fixture.setUserData(this);
         setCategoriesFilter(MarioBros.BRICK_BIT);

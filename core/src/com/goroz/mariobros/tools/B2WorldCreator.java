@@ -29,20 +29,20 @@ public class B2WorldCreator {
         this.map = screen.getMap();
         this.game = game;
         for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new Coins(screen, rect, game);
+            //Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            new Coins(screen, object, game);
         }
         for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new Bricks(screen, rect, game);
+            //Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            new Bricks(screen, object, game);
         }
         for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new Pipes(screen, rect);
+            //Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            new Pipes(screen, object);
         }
         for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new Grounds(screen, rect);
+            //Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            new Grounds(screen, object);
         }
         // create all goombas
         goombas = new Array<Goomba>();

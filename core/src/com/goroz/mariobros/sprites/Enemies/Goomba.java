@@ -66,7 +66,7 @@ public class Goomba extends Enemy {
         shape.setRadius(6 / MarioBros.PPM);
         fdef.filter.categoryBits = MarioBros.ENEMY_BIT;
         //what goomba can collide with
-        fdef.filter.maskBits = MarioBros.DEFAULT_BIT | MarioBros.COIN_BIT | MarioBros.BRICK_BIT | MarioBros.ENEMY_BIT | MarioBros.OBJECT_BIT | MarioBros.MARIO_BIT;
+        fdef.filter.maskBits = MarioBros.DEFAULT_BIT | MarioBros.COIN_BIT | MarioBros.BRICK_BIT | MarioBros.ENEMY_BIT | MarioBros.OBJECT_BIT | MarioBros.MARIO_BIT | MarioBros.GROUND_BIT;
         fdef.shape = shape;
         b2Body.createFixture(fdef).setUserData(this);
         //create goomba head

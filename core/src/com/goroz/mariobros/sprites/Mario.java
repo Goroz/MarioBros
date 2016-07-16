@@ -85,7 +85,7 @@ public class Mario extends Sprite {
         shape.setRadius(6 / MarioBros.PPM);
         fdef.filter.categoryBits = MarioBros.MARIO_BIT;
         //what mario can collide with
-        fdef.filter.maskBits = MarioBros.DEFAULT_BIT | MarioBros.COIN_BIT | MarioBros.BRICK_BIT | MarioBros.ENEMY_BIT | MarioBros.OBJECT_BIT | MarioBros.ENEMY_HEAD_BIT;
+        fdef.filter.maskBits = MarioBros.DEFAULT_BIT | MarioBros.COIN_BIT | MarioBros.BRICK_BIT | MarioBros.GROUND_BIT | MarioBros.ENEMY_BIT | MarioBros.OBJECT_BIT | MarioBros.ENEMY_HEAD_BIT | MarioBros.ITEM_BIT;
         fdef.shape = shape;
         b2body.createFixture(fdef);
 
@@ -148,7 +148,7 @@ public class Mario extends Sprite {
 
     public void update(float delta) {
         checkCanMove();
-        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight()/2 );
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion(getFrame(delta));
         // if player foot.position.y is static, velocity y = 0, reset jumpcount
         if (b2body.getLinearVelocity().y == 0) {
