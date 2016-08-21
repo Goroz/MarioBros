@@ -89,7 +89,7 @@ public class PlayScreen implements Screen {
 
         //create environment and player
         creator = new B2WorldCreator(this, game);
-        player = new Mario(this, mapWidth);
+        player = new Mario(this, mapWidth, game);
 
 
         music = game.manager.get("audio/music/mario_music.ogg", Music.class);
